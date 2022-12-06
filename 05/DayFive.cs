@@ -26,6 +26,7 @@ class DayFive
     public static void Run()
     {
 
+
         var lines = ReadLines();
         (var stacks, var lineNumber) = ParseCrateArrangement(lines);
 
@@ -35,15 +36,7 @@ class DayFive
         // PartOne(moves, stacks);
         PartTwo(moves, stacks);
 
-
-        var sb = new StringBuilder();
-
-        for (int i = 0; i < stacks.Length; i++)
-        {
-            sb.Append(stacks[i].Peek());
-        }
-
-        var topOfAllStacks = sb.ToString();
+        var topOfAllStacks = stacks.Aggregate(new StringBuilder(), (sb, st) => sb.Append(st.Peek())).ToString();
 
         System.Console.WriteLine(topOfAllStacks);
     }
