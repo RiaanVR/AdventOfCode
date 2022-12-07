@@ -50,7 +50,25 @@ class DaySeven
         PartTwo();
     }
 
-    record Folder(string Name, Folder? Parent, long Size, List<Folder> Children);
+    class Folder{
+        public Folder(string name, Folder? parent, long size, List<Folder> children)
+        {
+            Name = name;
+            Parent = parent;
+            Size = size;
+            Children = new List<Folder>();
+        }
+
+        public string Name { get; private set; }
+        public Folder? Parent { get; private set; }
+        public List<Folder> Children { get;private set; }
+        public long Size { get; set; }
+
+        public override string ToString()
+        {
+            return $"Name: {Name}, Size: {Size:D}, Children: {Children.Select(c=>c.ToString())}";
+        }
+    }
 
 
     private static void PartOne()
@@ -94,9 +112,10 @@ class DaySeven
 
         Folder FindBestMatch(Folder parent)
         {
-            var c = parent.Children.Where(f => f.Size >= totalNeeded).MinBy(f => f.Size);
-            if (c is not null)
+            
+            if (parent is not null)
             {
+                 parent.Children.Where(f => f.Size >= totalNeeded).MinBy(f => f.Size);
                 foreach (var f in parent.Children)
                 {
                     return FindBestMatch(f);
@@ -130,7 +149,6 @@ class DaySeven
         {
 
             string[] parts = line.Split(' ');
-
             if (parts[0] == "$")
             {
                 if (parts[1] == "cd")
@@ -146,7 +164,9 @@ class DaySeven
                         if (folder.Size <= threshold)
                             sumOfDirectoriesBelowThreshold += folder.Size;
 
-                        folder = folder.Parent with { Size = folder.Parent.Size + folder.Size };
+                        long size = folder.Size;
+                        folder = folder.Parent;
+                        folder.Size += size;
                     }
                 }
             }
@@ -156,7 +176,7 @@ class DaySeven
             {
                 // folder listing
                 int fileSize = int.Parse(parts[0]);
-                folder = folder! with { Size = folder.Size + fileSize };
+                folder.Size += fileSize;
 
             }
         }
