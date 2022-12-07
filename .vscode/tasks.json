@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/AdventOfCode2022/AdventOfCode2022.csproj",
+                "${workspaceFolder}/AdventOfCode2022.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -21,7 +21,7 @@
                 "watch",
                 "run",
                 "--project",
-                "${workspaceFolder}/AdventOfCode2022/AdventOfCode2022.csproj"
+                "${workspaceFolder}/AdventOfCode2022.csproj"
             ],
             "problemMatcher": "$msCompile"
         }
