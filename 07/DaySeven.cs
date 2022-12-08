@@ -112,16 +112,17 @@ class DaySeven
 
         Folder FindBestMatch(Folder parent)
         {
-            
-            if (parent is not null)
+                var c =  parent.Children.Where(f => f.Size >= totalNeeded).MinBy(f => f.Size);
+            if (c is not null)
             {
-                 parent.Children.Where(f => f.Size >= totalNeeded).MinBy(f => f.Size);
                 foreach (var f in parent.Children)
                 {
                     return FindBestMatch(f);
                 }
+                return c;
             }
-        return parent;
+
+            return parent;
 
         }
 
