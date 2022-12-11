@@ -8,7 +8,7 @@
 // DayEight.Run();
 
 
-IChallenge challenge = new DayTen();
+IChallenge challenge = new DayEleven();
 
 var dayName = challenge.GetType().Name;
 
